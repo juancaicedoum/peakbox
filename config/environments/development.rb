@@ -45,9 +45,6 @@ Rails.application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
-  # Raise exceptions for unpermitted parameters.
-  config.action_controller.forbid_unknown_action_parameters = true
-
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
