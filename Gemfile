@@ -4,7 +4,6 @@ source "https://rubygems.org"
 gem "rails", "~> 8.0.2"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
-<<<<<<< HEAD
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
@@ -19,21 +18,16 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Gemfile
-# ... otras gemas ...
+# ... otras gemas ... (Esta línea era un comentario en tu Gemfile, no una gema real)
 
-gem 'devise'
+gem 'devise' # Esta gema la añadiste tú, asegúrate de que esté presente
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-=======
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
->>>>>>> 6445efdc93586bdd4db684b09880f1298682850a
+# gem "bcrypt", "~> 3.1.7" # Esta línea estaba comentada, déjala así
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
-<<<<<<< HEAD
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
 gem "solid_cache"
 gem "solid_queue"
@@ -49,13 +43,13 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+# gem "image_processing", "~> 1.2" # Esta línea estaba comentada, déjala así
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug_gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
-  # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
+  # Static analysis for security vulnerabilities [https://brakemanscaner.org/]
   gem "brakeman", require: false
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
@@ -71,9 +65,4 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-=======
-group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
->>>>>>> 6445efdc93586bdd4db684b09880f1298682850a
 end
