@@ -77,7 +77,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Enable query cache by default.
-  config.active_record.query_cache_enabled = true
+#  config.active_record.query_cache_enabled = true
 
   # Inserts middleware to perform automatic browser detection on assets requests.
   # config.assets.js_compressor = :uglifier
