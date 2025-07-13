@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<<<<<<< HEAD
+<html lang="es">
+<head>
+  <title><%= content_for(:title) || "Peak Box App" %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+
+  <%= yield :head %>
+
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+
+  <style>
+    /* Estilos generales */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #2E4053;
+      color: #FFFFFF;
+      text-align: center;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .background-animation {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background: radial-gradient(circle, rgba(46,64,83,1) 0%, rgba(20,29,38,1) 100%);
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 15px 20px;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header .logo-container {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Estilos para el logo en el header */
+    .header-logo {
+      height: 40px;
+      width: auto;
+      vertical-align: middle;
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+    }
+
+    header .logo-link {
+        display: inline-block;
+        line-height: 0;
+    }
+
+    header nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    header nav li {
+      margin: 0 15px;
+    }
+
+    header nav a {
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: color 0.3s ease;
+      white-space: nowrap;
+    }
+
+    header nav a:hover {
+      color: #D8C3A5;
+    }
+
+    header .user-info {
+      font-size: 0.9em;
+      color: #FFFFFF;
+      margin-left: 20px;
+      white-space: nowrap;
+    }
+
+    header .user-info a {
+      color: #D8C3A5;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    header .user-info a:hover {
+      color: #C3AF94;
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      box-sizing: border-box;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: #FFFFFF;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    p {
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+
+    /* Estilos para mensajes flash */
+    .flash-message {
+      padding: 10px 20px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .flash-message.notice {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .flash-message.alert {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    /* Estilos generales para tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      /* Ajuste para el scroll horizontal de la tabla */
+      /* NOTA: display: block; y overflow-x: auto; se moverán a .table-responsive */
+    }
+
+    /* NUEVA CLASE: Para tablas responsivas que necesiten scroll horizontal */
+    .table-responsive {
+        overflow-x: auto; /* Permite scroll horizontal */
+        display: block; /* Hace que la tabla se comporte como un bloque para el overflow */
+        width: 100%; /* Asegura que ocupe el 100% del contenedor */
+        -webkit-overflow-scrolling: touch; /* Mejora el scroll en iOS */
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      white-space: nowrap; /* Evita que el texto se rompa */
+    }
+
+    th {
+      background-color: rgba(255, 255, 255, 0.15);
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.9em;
+      color: #FFFFFF; /* Color blanco para encabezados */
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    a {
+      color: #D8C3A5;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #C3AF94;
+    }
+
+    /* Estilos para formularios */
+    form div {
+      margin-bottom: 15px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #D8C3A5;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form input[type="number"],
+    form input[type="date"],
+    form input[type="datetime-local"] {
+      width: calc(100% - 22px);
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.4);
+      color: #FFFFFF;
+      box-sizing: border-box;
+    }
+    form input[type="date"],
+    form input[type="datetime-local"] {
+        color-scheme: dark;
+    }
+
+    form input[type="submit"],
+    .action-button,
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #D8C3A5;
+      color: #2E4053;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: bold;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      margin-right: 10px;
+    }
+
+    form input[type="submit"]:hover,
+    .action-button:hover,
+    .btn:hover {
+      background-color: #C3AF94;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-primary { background-color: #D8C3A5; }
+    .btn-success { background-color: #4CAF50; color: white; }
+    .btn-secondary { background-color: #555; color: white; }
+    .btn-danger { background-color: #f44336; color: white; }
+
+    .btn-sm {
+      padding: 5px 10px;
+      font-size: 0.8em;
+      border-radius: 20px;
+      margin: 2px;
+    }
+
+    /* Responsive adjustments for header and main content */
+    @media (max-width: 768px) {
+      header .header-content {
+        flex-direction: column;
+      }
+      header nav ul {
+        margin-top: 10px;
+        flex-direction: column;
+        align-items: center;
+      }
+      header nav li {
+        margin: 5px 0;
+      }
+      header .user-info {
+        margin-top: 10px;
+        margin-left: 0;
+        text-align: center;
+      }
+      main { padding: 15px; }
+      th, td { padding: 8px; font-size: 0.9em; }
+      form input[type="text"], form input[type="email"],
+      form input[type="password"], form input[type="number"],
+      form input[type="date"], form input[type="datetime-local"] {
+        width: calc(100% - 16px);
+        padding: 8px;
+      }
+      form input[type="submit"], .action-button, .btn {
+        padding: 10px 20px;
+        font-size: 1em;
+        margin-right: 5px;
+        margin-bottom: 10px;
+      }
+      .header-logo {
+        height: 35px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header { padding: 10px 15px; }
+      .header-logo { height: 30px; }
+      header nav a { font-size: 0.9em; }
+      main { padding: 10px; }
+      th, td { padding: 6px; font-size: 0.8em; }
+      form input[type="submit"], .action-button, .btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        margin-right: 5px;
+        margin-bottom: 10px;
+      }
+      form div { margin-bottom: 10px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-animation"></div>
+
+  <%# Mensajes Flash %>
+  <% if notice %>
+    <div class="flash-message notice"><%= notice %></div>
+  <% end %>
+  <% if alert %>
+    <div class="flash-message alert"><%= alert %></div>
+  <% end %>
+
+  <header>
+    <div class="header-content">
+      <div class="logo-container">
+        <%= link_to root_path, class: 'logo-link' do %>
+          <%= image_tag "peakbox_logo.png", alt: "Peak Box Logo", class: "header-logo" %>
+        <% end %>
+      </div>
+      <nav>
+        <ul>
+          <li><%= link_to 'Inicio', root_path %></li>
+          <li><%= link_to 'Reservar Clases', bookings_path %></li>
+          <% if user_signed_in? && current_user.admin? %>
+            <li><%= link_to 'Admin: Horarios', admin_schedules_path %></li>
+            <li><%= link_to 'Admin: Usuarios', admin_users_path %></li>
+          <% end %>
+          <% if user_signed_in? %>
+            <li><%= link_to 'Cerrar Sesión', destroy_user_session_path, data: { turbo_method: :delete } %></li>
+          <% else %>
+            <li><%= link_to 'Iniciar Sesión', new_user_session_path %></li>
+            <li><%= link_to 'Registrarse', new_user_registration_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <%= yield %>
+  </main>
+</body>
+</html>
+=======
+<html>
+  <head>
+    <title><%= content_for(:title) || "Peak Box Landing" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Si no estás usando PWA, puedes dejar estas líneas comentadas o eliminarlas %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Carga directamente tu archivo de estilos de la landing page %>
+    <%= stylesheet_link_tag "landing_page", "data-turbo-track": "reload" %>
+
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
+>>>>>>> 6445efdc93586bdd4db684b09880f1298682850a

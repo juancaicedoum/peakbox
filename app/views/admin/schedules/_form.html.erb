@@ -1,0 +1,47 @@
+<%= form_with(model: [:admin, @schedule], local: true) do |form| %>
+  <% if form.object.errors.any? %>
+    <div id="error_explanation" style="color: red;">
+      <h2><%= pluralize(form.object.errors.count, "error") %> impidieron que este horario se guardara:</h2>
+      <ul>
+        <% form.object.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="margin-bottom: 10px;">
+    <%= form.label :name, 'Nombre de la clase:' %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div style="margin-bottom: 10px;">
+    <%= form.label :date, 'Fecha:' %><br>
+    <%= form.date_field :date %>
+  </div>
+
+  <div style="margin-bottom: 10px;">
+    <%= form.label :start_time, 'Hora de Inicio:' %><br>
+    <%= form.datetime_field :start_time, value: form.object.start_time.try(:strftime, '%Y-%m-%dT%H:%M') %>
+  </div>
+
+  <div style="margin-bottom: 10px;">
+    <%= form.label :end_time, 'Hora de Fin:' %><br>
+    <%= form.datetime_field :end_time, value: form.object.end_time.try(:strftime, '%Y-%m-%dT%H:%M') %>
+  </div>
+
+  <div style="margin-bottom: 10px;">
+    <%= form.label :capacity, 'Cupos Disponibles:' %><br>
+    <%= form.number_field :capacity %>
+  </div>
+
+  <div style="margin-bottom: 10px;">
+    <%= form.label :enabled, 'Habilitado:' %>
+    <%= form.check_box :enabled %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Guardar Horario' %>
+    <%= link_to 'Volver a Horarios', admin_schedules_path %>
+  </div>
+<% end %>

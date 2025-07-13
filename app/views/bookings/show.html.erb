@@ -1,0 +1,12 @@
+<h1>Detalles de tu Reserva</h1>
+
+<p><strong>Clase:</strong> <%= @booking.schedule.name %></p>
+<p><strong>Fecha:</strong> <%= @booking.schedule.date.strftime("%d/%m/%Y") %></p>
+<p><strong>Hora:</strong> <%= @booking.schedule.start_time.strftime("%H:%M") %> - <%= @booking.schedule.end_time.strftime("%H:%M") %></p>
+<p><strong>Tu Código de Confirmación:</strong> <%= @booking.confirmation_code %></p>
+<p><strong>Estado:</strong> <%= @booking.status %></p>
+<p><strong>Reservado por:</strong> <%= @booking.user.email %></p>
+<p><strong>Fecha de Reserva:</strong> <%= @booking.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+
+<%= link_to 'Volver a Horarios Disponibles', bookings_path %> |
+<%= link_to 'Volver al Inicio', root_path %>

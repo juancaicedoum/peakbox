@@ -1,0 +1,233 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #2E4053;
+    color: #FFFFFF;
+    text-align: center;
+    overflow-x: hidden;
+    perspective: 1000px;
+}
+
+.background-animation {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: radial-gradient(circle, rgba(46,64,83,1) 0%, rgba(20,29,38,1) 100%);
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px 0;
+    box-sizing: border-box;
+}
+
+.card-panel {
+    padding: 3em;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+    max-width: 90%;
+    width: 650px;
+    box-sizing: border-box;
+    transform: translateY(0) scale(1);
+    transition: all 0.8s ease-in-out;
+    margin: 30px auto;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.logo {
+    margin-bottom: 2.5em;
+    animation: floatEffect 3s ease-in-out infinite alternate;
+}
+
+.logo img {
+    max-width: 280px;
+    height: auto;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+}
+
+h1 {
+    font-size: 3.2em;
+    margin-bottom: 0.6em;
+    color: #FFFFFF;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+    letter-spacing: 1px;
+}
+
+p {
+    font-size: 1.2em;
+    margin-bottom: 1.2em;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+#countdown {
+    font-size: 4.5em;
+    font-weight: bold;
+    margin-top: 1.5em;
+    margin-bottom: 2em;
+    color: #D8C3A5;
+    text-shadow: 0 0 20px rgba(216, 195, 165, 0.8);
+    letter-spacing: 2px;
+}
+
+.action-button {
+    display: inline-block;
+    padding: 20px 40px;
+    background-color: #D8C3A5;
+    color: #2E4053;
+    text-decoration: none;
+    font-size: 1.8em;
+    font-weight: bold;
+    border-radius: 60px;
+    transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+}
+
+.action-button:hover {
+    background-color: #C3AF94;
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+}
+
+.services-panel {
+    padding: 4em 3em;
+    background-color: rgba(56, 79, 102, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+    max-width: 90%;
+    width: 650px;
+    box-sizing: border-box;
+    color: white;
+    transform: translateY(0) scale(1);
+    transition: all 0.8s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+    margin: 30px auto;
+    z-index: 1;
+}
+
+.services-panel.active {
+    opacity: 1;
+    pointer-events: all;
+    display: block;
+    transform: translateY(0) scale(1);
+}
+
+.services-panel h2 {
+    font-size: 2.5em;
+    margin-bottom: 1em;
+    color: #D8C3A5;
+    text-shadow: 0 0 10px rgba(216, 195, 165, 0.5);
+}
+
+.services-panel ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5em;
+    margin-bottom: 2.5em;
+}
+
+.services-panel ul li {
+    font-size: 1.1em;
+    margin-bottom: 0.8em;
+    position: relative;
+    padding-left: 1.5em;
+}
+
+.services-panel ul li::before {
+    content: '🏋️';
+    position: absolute;
+    left: 0;
+    color: #D8C3A5;
+}
+
+@keyframes floatEffect {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+@media (max-width: 768px) {
+    .card-panel, .services-panel {
+        width: 95%;
+        padding: 1.8em;
+        margin: 20px auto;
+    }
+    .logo img {
+        max-width: 180px;
+        margin-bottom: 1.2em;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    p {
+        font-size: 0.95em;
+    }
+    #countdown {
+        font-size: 2.8em;
+        margin-top: 0.8em;
+        margin-bottom: 1.2em;
+    }
+    .action-button {
+        font-size: 1.3em;
+        padding: 14px 28px;
+    }
+    .services-panel h2 {
+        font-size: 1.8em;
+    }
+    .services-panel ul li {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-panel, .services-panel {
+        padding: 1.2em;
+        margin: 15px auto;
+    }
+    .logo img {
+        max-width: 130px;
+        margin-bottom: 0.8em;
+    }
+    h1 {
+        font-size: 1.6em;
+        line-height: 1.3;
+    }
+    p {
+        font-size: 0.85em;
+    }
+    #countdown {
+        font-size: 2.2em;
+        margin-top: 0.6em;
+        margin-bottom: 1em;
+    }
+    .action-button {
+        font-size: 1.1em;
+        padding: 10px 20px;
+    }
+    .services-panel h2 {
+        font-size: 1.6em;
+    }
+    .services-panel ul li {
+        font-size: 0.85em;
+    }
+}

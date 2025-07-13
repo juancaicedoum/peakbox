@@ -1,0 +1,78 @@
+<h1>Horarios Disponibles y Mis Reservas</h1>
+
+<% if user_signed_in? %>
+  <h2>Mis Reservas</h2>
+  <% if @user_bookings.any? %>
+    <table border="1" style="width:100%; border-collapse: collapse; margin-bottom: 30px;">
+      <thead>
+        <tr>
+          <th>Clase</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Estado</th>
+          <th>Código de Confirmación</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user_bookings.each do |booking| %>
+          <tr>
+            <td><%= booking.schedule.name %></td>
+            <td><%= booking.schedule.date.strftime("%d/%m/%Y") %></td>
+            <td><%= booking.schedule.start_time.strftime("%H:%M") %> - <%= booking.schedule.end_time.strftime("%H:%M") %></td>
+            <td><%= booking.status %></td>
+            <td><%= booking.confirmation_code %></td>
+            <td>
+            <%= link_to 'Ver Detalles', booking_path(booking) %>
+            <% if booking.status == 'confirmed' %> <%# Solo permitir eliminar reservas confirmadas %>
+              | <%= link_to 'Eliminar', booking_path(booking), data: { turbo_method: :delete, turbo_confirm: '¿Estás seguro de que quieres cancelar esta reserva?' }, class: 'btn-danger' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Aún no tienes reservas. ¡Anímate a reservar un espacio!</p>
+  <% end %>
+<% end %>
+
+<h2>Reservar un Espacio</h2>
+<% if @available_schedules.any? %>
+  <table border="1" style="width:100%; border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th>Clase</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Cupos Restantes</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @available_schedules.each do |schedule| %>
+        <tr>
+          <td><%= schedule.name %></td>
+          <td><%= schedule.date.strftime("%d/%m/%Y") %></td>
+          <td><%= schedule.start_time.strftime("%H:%M") %> - <%= schedule.end_time.strftime("%H:%M") %></td>
+          <td><%= schedule.capacity - Booking.where(schedule_id: schedule.id, status: 'confirmed').count %></td>
+          <td>
+            <% if user_signed_in? %>
+              <% if current_user.bookings.exists?(schedule: schedule, status: 'confirmed') %>
+                <span style="color: #4CAF50; font-weight: bold;">Reservado</span>
+              <% elsif current_user.bookings.exists?(schedule: schedule, status: 'cancelled') %>
+                <span style="color: #D8C3A5; font-weight: bold;">Cancelado</span>
+              <% else %>
+                <%= link_to 'Reservar Ahora', bookings_path(schedule_id: schedule.id), data: { turbo_method: :post, turbo_confirm: '¿Estás seguro de que quieres reservar este espacio?' }, class: 'btn btn-primary' %>
+              <% end %>
+            <% else %>
+              <%= link_to 'Iniciar Sesión para Reservar', new_user_session_path, class: 'btn btn-secondary' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No hay horarios disponibles para reservar en este momento. Vuelve a intentarlo más tarde.</p>
+<% end %>

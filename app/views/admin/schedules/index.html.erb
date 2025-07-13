@@ -1,0 +1,40 @@
+<h1>Gestión de Horarios</h1>
+
+<%= link_to 'Crear Nuevo Horario', new_admin_schedule_path, class: 'btn btn-primary' %>
+
+<%# QUITA TODOS LOS 'style=' de la tabla y sus encabezados/celdas %>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Fecha</th>
+      <th>Hora Inicio</th>
+      <th>Hora Fin</th>
+      <th>Cupos</th>
+      <th>Habilitado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @schedules.any? %>
+      <% @schedules.each do |schedule| %>
+        <tr>
+          <td><%= schedule.name %></td>
+          <td><%= schedule.date.strftime("%d/%m/%Y") %></td>
+          <td><%= schedule.start_time.strftime("%H:%M") %></td>
+          <td><%= schedule.end_time.strftime("%H:%M") %></td>
+          <td><%= schedule.capacity %></td>
+          <td><%= schedule.enabled ? 'Sí' : 'No' %></td>
+          <td>
+            <%= link_to 'Editar', edit_admin_schedule_path(schedule), class: 'btn btn-secondary btn-sm' %> |
+            <%= link_to 'Eliminar', admin_schedule_path(schedule), data: { turbo_method: :delete, turbo_confirm: '¿Estás seguro de que quieres eliminar este horario?' }, class: 'btn btn-danger btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="7">No hay horarios disponibles.</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

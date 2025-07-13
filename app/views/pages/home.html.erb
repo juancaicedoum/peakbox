@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peak Box - Manizales</title>
+  <link rel="stylesheet" href="/assets/application.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="background-animation"></div>
+
+  <div class="main-content">
+    <div class="card-panel" id="main-landing-panel">
+      <div class="logo">
+        <%= image_tag "peakbox_logo.png", alt: "Peak Box Logo" %>
+      </div>
+
+      <h1>¡Bienvenido a Peak Box Manizales!</h1>
+      <p>Prepárate para una nueva experiencia de entrenamiento y bienestar.</p>
+      <p>¡Nuestra gran apertura está a punto de llegar!</p>
+
+      <div id="countdown"></div>
+
+      <a href="#" class="action-button" id="services-toggle-button">Ver Nuestros Servicios</a>
+    </div>
+
+    <section id="services-section" class="services-panel">
+      <div class="logo">
+        <%= image_tag "peakbox_logo.png", alt: "Peak Box Logo" %>
+      </div>
+      <h2>Nuestros Servicios Exclusivos</h2>
+      <p>En Peak Box, te ofrecemos una variedad de programas diseñados para alcanzar tus metas de fitness:</p>
+      <ul>
+        <li>Entrenamiento Funcional de Alta Intensidad (HIIT)</li>
+        <li>Clases de Levantamiento Olímpico</li>
+        <li>Sesiones Personalizadas con Entrenadores Certificados</li>
+        <li>Nutrición y Asesoramiento Dietético</li>
+        <li>Áreas de Cardio y Pesas Libres</li>
+        <li>Y mucho más... ¡Innovando siempre para ti!</li>
+      </ul>
+      <a href="#" class="action-button" id="back-to-main-button">Regresar al Inicio</a>
+      <br><br>
+      <a href="#" class="action-button" id="login-button-secondary">Acceder a la Aplicación</a>
+    </section>
+  </div>
+
+
+  <script>
+    const openDate = new Date("Julio 20, 2025 00:00:00 GMT-0500").getTime();
+
+    const countdownElement = document.getElementById("countdown");
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = openDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      if (distance < 0) {
+        countdownElement.innerHTML = "¡Ya hemos abierto! ¡Te esperamos!";
+        clearInterval(interval);
+        const servicesButton = document.getElementById('services-toggle-button');
+        servicesButton.textContent = '¡Agéndate Ahora!';
+        servicesButton.href = '#';
+      } else {
+        countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+
+    const mainPanel = document.getElementById('main-landing-panel');
+    const servicesPanel = document.getElementById('services-section');
+    const servicesToggleButton = document.getElementById('services-toggle-button');
+    const backToMainButton = document.getElementById('back-to-main-button');
+    const loginButtonSecondary = document.getElementById('login-button-secondary');
+
+    servicesToggleButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      mainPanel.style.transform = 'translateY(-50px) scale(0.9)';
+      mainPanel.style.opacity = '0';
+      mainPanel.style.pointerEvents = 'none';
+
+      setTimeout(() => {
+        mainPanel.style.display = 'none';
+        servicesPanel.style.display = 'block';
+        setTimeout(() => {
+          servicesPanel.style.transform = 'translateY(0) scale(1)';
+          servicesPanel.style.opacity = '1';
+          servicesPanel.style.pointerEvents = 'all';
+        }, 50);
+      }, 800);
+    });
+
+    backToMainButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      servicesPanel.style.transform = 'translateY(-50px) scale(0.9)';
+      servicesPanel.style.opacity = '0';
+      servicesPanel.style.pointerEvents = 'none';
+
+      setTimeout(() => {
+        servicesPanel.style.display = 'none';
+        mainPanel.style.display = 'block';
+        setTimeout(() => {
+          mainPanel.style.transform = 'translateY(0) scale(1)';
+          mainPanel.style.opacity = '1';
+          mainPanel.style.pointerEvents = 'all';
+        }, 50);
+      }, 800);
+    });
+
+    loginButtonSecondary.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('¡Redirigiendo a la aplicación principal de Peak Box para iniciar sesión!');
+    });
+  </script>
+</body>
+</html>
