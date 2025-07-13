@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # app/controllers/application_controller.rb
 class ApplicationController < ActionController::Base
   # Configura los parámetros permitidos por Devise para sign_up y account_update.
@@ -26,9 +25,4 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, alert: "No tienes permisos para acceder a esta sección."
     end
   end
-=======
-class ApplicationController < ActionController::Base
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
-  allow_browser versions: :modern
->>>>>>> 6445efdc93586bdd4db684b09880f1298682850a
 end
