@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html lang="es">
 <head>
   <title><%= content_for(:title) || "Peak Box App" %></title>
@@ -179,23 +178,21 @@
       background-color: rgba(255, 255, 255, 0.1);
       border-radius: 8px;
       overflow: hidden;
-      /* Ajuste para el scroll horizontal de la tabla */
-      /* NOTA: display: block; y overflow-x: auto; se moverán a .table-responsive */
     }
 
     /* NUEVA CLASE: Para tablas responsivas que necesiten scroll horizontal */
     .table-responsive {
-        overflow-x: auto; /* Permite scroll horizontal */
-        display: block; /* Hace que la tabla se comporte como un bloque para el overflow */
-        width: 100%; /* Asegura que ocupe el 100% del contenedor */
-        -webkit-overflow-scrolling: touch; /* Mejora el scroll en iOS */
+        overflow-x: auto;
+        display: block;
+        width: 100%;
+        -webkit-overflow-scrolling: touch;
     }
 
     th, td {
       padding: 12px;
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #FFFFFF;
-      white-space: nowrap; /* Evita que el texto se rompa */
+      white-space: nowrap;
     }
 
     th {
@@ -203,7 +200,7 @@
       font-weight: bold;
       text-transform: uppercase;
       font-size: 0.9em;
-      color: #FFFFFF; /* Color blanco para encabezados */
+      color: #2E4053;
     }
 
     tr:nth-child(even) {
@@ -389,32 +386,3 @@
   </main>
 </body>
 </html>
-=======
-<html>
-  <head>
-    <title><%= content_for(:title) || "Peak Box Landing" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <%# Si no estás usando PWA, puedes dejar estas líneas comentadas o eliminarlas %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Carga directamente tu archivo de estilos de la landing page %>
-    <%= stylesheet_link_tag "landing_page", "data-turbo-track": "reload" %>
-
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
-</html>
->>>>>>> 6445efdc93586bdd4db684b09880f1298682850a
