@@ -13,12 +13,13 @@
   <div style="margin-bottom: 10px;">
     <%= form.label :email %><br>
     <% if @user.persisted? %>
-      <%= form.email_field :email, readonly: true %>
+      <%= form.email_field :email, readonly: true %> <%# Email solo lectura en edición %>
     <% else %>
       <%= form.email_field :email %>
     <% end %>
   </div>
 
+  <%# INICIO DE CAMPOS DE DETALLES: SE MUESTRAN SIEMPRE (CREACIÓN Y EDICIÓN) %>
   <div style="margin-bottom: 10px;">
     <%= form.label :first_name, 'Nombre' %><br>
     <%= form.text_field :first_name %>
@@ -38,8 +39,9 @@
     <%= form.label :phone_number, 'Número de Celular' %><br>
     <%= form.text_field :phone_number %>
   </div>
+  <%# FIN DE CAMPOS DE DETALLES %>
 
-  <% unless @user.persisted? %>
+  <% unless @user.persisted? %> <%# Password y confirmación SOLO para creación %>
     <div style="margin-bottom: 10px;">
       <%= form.label :password %><br>
       <%= form.password_field :password %>

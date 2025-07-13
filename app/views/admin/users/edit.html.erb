@@ -1,29 +1,3 @@
-<h1>Editar Usuario: <%= @user.email %></h1>
+<h1>Editar Usuario: <%= @user.first_name %></h1>
 
-<%= form_with(model: [:admin, @user], local: true) do |form| %>
-  <% if form.object.errors.any? %>
-    <div id="error_explanation" style="color: red;">
-      <h2><%= pluralize(form.object.errors.count, "error") %> impidieron que este usuario se guardara:</h2>
-      <ul>
-        <% form.object.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div style="margin-bottom: 10px;">
-    <%= form.label :paid_until, 'Mensualidad pagada hasta:' %><br>
-    <%= form.date_field :paid_until %>
-  </div>
-
-  <div style="margin-bottom: 10px;">
-    <%= form.label :admin, 'Es Administrador:' %>
-    <%= form.check_box :admin %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit 'Actualizar Usuario' %>
-    <%= link_to 'Volver a Gestión de Usuarios', admin_users_path %>
-  </div>
-<% end %>
+<%= render 'form', user: @user %>

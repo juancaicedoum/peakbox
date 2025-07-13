@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   # Relaciones
-  has_many :bookings # <--- Asegúrate de que esta línea esté aquí
+  has_many :bookings, dependent: :destroy  # <--- Asegúrate de que esta línea esté aquí
 
   # Métodos personalizados para la lógica de negocio
   # Verifica si el usuario es un administrador

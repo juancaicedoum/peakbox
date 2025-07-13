@@ -1,8 +1,9 @@
+<%# app/views/admin/users/index.html.erb %>
 <h1>Gestión de Usuarios</h1>
 
 <%= link_to 'Crear Nuevo Usuario', new_admin_user_path, class: 'btn btn-primary' %>
 
-<table class="table-responsive"> <%# AÑADIDA LA CLASE table-responsive %>
+<table class="table-responsive">
   <thead>
     <tr>
       <th>Email</th>
@@ -27,11 +28,14 @@
         <td><%= user.admin? ? 'Sí' : 'No' %></td>
         <td>
           <%= link_to 'Editar', edit_admin_user_path(user), class: 'btn btn-secondary btn-sm' %>
+          <% if user != current_user %>
+            | <%= link_to 'Eliminar', admin_user_path(user), data: { turbo_method: :delete, turbo_confirm: '¿Estás seguro de que quieres eliminar a este usuario?' }, class: 'btn btn-danger btn-sm' %>
+          <% end %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br> 
+<br>
 <%= link_to 'Volver al Panel Admin', admin_root_path, class: 'btn btn-secondary' %>

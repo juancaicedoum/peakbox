@@ -1,15 +1,16 @@
+# config/routes.rb
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :bookings, only: [:index, :create, :show, :destroy] # <-- This line is crucial for bookings
-
   namespace :admin do
     resources :schedules
-    resources :users, only: [:index, :new, :create, :edit, :update] # <-- This line for admin users
-    root to: 'schedules#index' # Root for admin panel
+    resources :users, only: [:index, :new, :create, :edit, :update, :destroy] # <--- Asegúrate de que :destroy esté aquí
+    root to: 'schedules#index'
   end
 
-  root to: 'home#index' # Main app root
+  resources :bookings, only: [:index, :create, :show, :destroy]
+
+  root to: 'home#index'
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
