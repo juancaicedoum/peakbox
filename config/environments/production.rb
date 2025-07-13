@@ -7,7 +7,7 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
-
+  config.secret_key_base = ENV["SECRET_KEY_BASE"]
   # Eager load code on boot. This eager loads most of Rails and
   # your application in order to prepare for production.
   config.eager_load = true
