@@ -1,6 +1,6 @@
 # app/models/schedule.rb
 class Schedule < ApplicationRecord
-  has_many :bookings # Añadiremos esto cuando creemos el modelo Booking
+  has_many :bookings, dependent: :destroy # Añadiremos esto cuando creemos el modelo Booking
 
   validates :name, presence: true
   validates :date, presence: true

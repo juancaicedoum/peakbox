@@ -19,6 +19,270 @@
   <link rel="apple-touch-icon" href="/icon.png">
 
   <style>
+
+    /* Estilos para la página de inicio (ajustes para el banner) */
+.home-container {
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+    max-width: 1200px; /* Ancho máximo para el contenido de la home */
+    margin: 50px auto;
+    box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
+}
+
+.home-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.text-section {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.text-section h1 {
+    font-size: 2.8em;
+    margin-bottom: 0.5em;
+    color: #D8C3A5;
+    text-align: left;
+}
+
+.text-section p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 1em;
+}
+
+/* INICIO ESTILOS DEL BANNER */
+.banner-section {
+    flex: 1.5; /* Dale más espacio al banner que al texto */
+    min-width: 350px; /* Ancho mínimo para el banner */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Para los botones de navegación */
+}
+
+.slideshow-container {
+    max-width: 700px; /* Ancho máximo del slideshow */
+    position: relative;
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden; /* Para contener las imágenes y el radio */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.banner-image {
+    width: 100%;
+    height: 400px; /* Altura fija para todas las imágenes del banner */
+    object-fit: cover; /* Recorta la imagen para cubrir el espacio */
+    border-radius: 10px; /* Asegura que la imagen tenga el mismo radio */
+}
+
+/* Oculta las imágenes por defecto */
+.mySlides {
+    display: none;
+}
+
+/* Botones de adelante y atrás */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(0,0,0,0.6); /* Fondo semi-transparente */
+}
+
+/* Posiciona el botón "siguiente" a la derecha */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* En hover, añade un fondo más oscuro */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* Texto numerado (si lo quieres, lo tenemos oculto) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* Puntos de paginación/círculos */
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active-dot, .dot:hover {
+    background-color: #D8C3A5; /* Color crema/beige al estar activo o en hover */
+}
+
+/* Animación de fade */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+/* FIN ESTILOS DEL BANNER */
+
+/* Media queries para responsividad (ajuste para el banner) */
+@media (max-width: 768px) {
+    .home-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .text-section {
+        text-align: center;
+    }
+    .text-section h1 {
+        text-align: center;
+    }
+    .button-group {
+        justify-content: center;
+    }
+    .home-container {
+        margin: 30px auto;
+        padding: 20px;
+    }
+    .banner-image {
+        height: 300px; /* Reduce la altura de la imagen en móviles */
+    }
+    .slideshow-container {
+        max-width: 95%; /* Ocupa más ancho en móviles */
+    }
+}
+
+    /* Estilos para la vista de estado de mensualidad */
+.membership-status-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px); /* Ajusta altura similar al login */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.membership-status-card {
+    background: linear-gradient(145deg, rgba(46,64,83, 0.95), rgba(20,29,38, 0.9));
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+    padding: 50px;
+    max-width: 550px; /* Un poco más ancho para el mensaje */
+    width: 100%;
+    text-align: center;
+    color: #E0E0E0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeInScale 0.7s ease-out forwards;
+}
+
+.membership-status-card h2 {
+    font-size: 2.5em;
+    margin-bottom: 35px;
+    color: #D8C3A5;
+    text-shadow: 0 0 10px rgba(216, 195, 165, 0.5);
+}
+
+.status-indicator {
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    transition: all 0.5s ease;
+}
+
+.status-indicator p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.status-indicator h3 {
+    font-size: 3.5em; /* Tamaño grande para el estado */
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.status-indicator.active {
+    background-color: rgba(60, 179, 113, 0.2); /* Verde semi-transparente */
+    border: 2px solid #3CB371; /* Borde verde */
+    color: #3CB371; /* Texto verde */
+}
+
+.status-indicator.inactive {
+    background-color: rgba(220, 20, 60, 0.2); /* Rojo semi-transparente */
+    border: 2px solid #DC143C; /* Borde rojo */
+    color: #DC143C; /* Texto rojo */
+}
+
+.status-message {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    color: #FFFFFF;
+}
+
+.call-to-action {
+    font-size: 1.1em;
+    color: #D8C3A5;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+/* Estilo para el botón de volver (ya deberías tener btn-secondary, solo ajusto margen) */
+.membership-status-card .btn-secondary {
+    margin-top: 20px;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    border-radius: 40px;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 600px) {
+    .membership-status-card {
+        padding: 30px;
+    }
+    .membership-status-card h2 {
+        font-size: 2em;
+    }
+    .status-indicator h3 {
+        font-size: 2.8em;
+    }
+    .status-message, .call-to-action {
+        font-size: 1em;
+    }
+}
+
     /* Estilos generales */
     body {
       font-family: 'Montserrat', sans-serif;
@@ -32,6 +296,97 @@
       display: flex;
       flex-direction: column;
     }
+
+
+    /* Estilos para la página de inicio */
+.home-container {
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo para la sección principal */
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+    max-width: 1000px; /* Ancho máximo para el contenido de la home */
+    margin: 50px auto; /* Centrar y dar espacio */
+}
+
+.home-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 30px; /* Espacio entre la sección de texto y la imagen */
+    flex-wrap: wrap; /* Permite que las secciones se envuelvan en pantallas pequeñas */
+}
+
+.text-section {
+    flex: 1; /* Ocupa el espacio disponible */
+    min-width: 300px; /* Ancho mínimo para el texto */
+    text-align: left; /* Alinea el texto a la izquierda */
+    color: #FFFFFF; /* Color de texto claro */
+}
+
+.text-section h1 {
+    font-size: 2.8em;
+    margin-bottom: 0.5em;
+    color: #D8C3A5; /* Color del título */
+    text-align: left; /* Título alineado a la izquierda */
+}
+
+.text-section p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 1em;
+}
+
+.image-section {
+    flex: 1; /* Ocupa el espacio disponible */
+    min-width: 300px; /* Ancho mínimo para la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Bordes redondeados para la imagen */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    object-fit: cover; /* Ajusta la imagen sin distorsionarla */
+    max-height: 400px; /* Altura máxima para la imagen */
+}
+
+.button-group {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px; /* Espacio entre los botones */
+    flex-wrap: wrap; /* Permite que los botones se envuelvan */
+    justify-content: flex-start; /* Alinea los botones a la izquierda */
+}
+
+.button-group .btn { /* Ajustes para los botones dentro del grupo */
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 40px;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .home-content {
+        flex-direction: column; /* Apila las secciones en móvil */
+        text-align: center;
+    }
+    .text-section {
+        text-align: center;
+    }
+    .text-section h1 {
+        text-align: center;
+    }
+    .button-group {
+        justify-content: center; /* Centra los botones en móvil */
+    }
+    .home-container {
+        margin: 30px auto;
+        padding: 20px;
+    }
+}
 
     .background-animation {
         position: fixed;
@@ -169,6 +524,193 @@
       color: #721c24;
       border: 1px solid #f5c6cb;
     }
+
+    
+   /* Estilos para las vistas de autenticación (login, registro) */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px); /* Altura de la ventana menos el header */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.auth-card {
+    background: linear-gradient(145deg, rgba(46,64,83, 0.95), rgba(20,29,38, 0.9)); /* Degradado azul oscuro */
+    border-radius: 20px; /* Bordes más redondeados */
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8); /* Sombra más pronunciada */
+    padding: 50px; /* Más padding */
+    max-width: 480px; /* Un poco más ancho */
+    width: 100%;
+    text-align: center;
+    color: #E0E0E0; /* Texto gris claro */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
+    animation: fadeInScale 0.7s ease-out forwards; /* Animación de entrada */
+}
+
+/* Animación de entrada para la tarjeta */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+.auth-card h2 {
+    font-size: 2.5em; /* Título más grande */
+    margin-bottom: 35px;
+    color: #D8C3A5; /* Color crema/beige de la marca */
+    text-shadow: 0 0 10px rgba(216, 195, 165, 0.5); /* Sombra de texto */
+}
+
+.auth-card .field {
+    margin-bottom: 25px; /* Más espacio entre campos */
+    text-align: left;
+}
+
+.auth-card label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #D8C3A5; /* Etiquetas en color crema/beige */
+    font-size: 1.1em;
+}
+
+.auth-card .form-control {
+    width: calc(100% - 24px); /* Ancho completo menos padding y borde */
+    padding: 14px 12px; /* Más padding */
+    border: 1px solid rgba(216, 195, 165, 0.4); /* Borde con acento de marca */
+    border-radius: 10px; /* Bordes más redondeados */
+    background-color: rgba(255, 255, 255, 0.05); /* Fondo muy sutilmente transparente */
+    color: #FFFFFF; /* Texto blanco en el campo */
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-card .form-control:focus {
+    border-color: #D8C3A5; /* Borde más brillante al enfocar */
+    box-shadow: 0 0 15px rgba(216, 195, 165, 0.4); /* Sombra de enfoque */
+    outline: none; /* Quita el outline por defecto del navegador */
+}
+
+.auth-card .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.auth-card .actions {
+    margin-top: 40px; /* Más espacio para el botón principal */
+}
+
+.auth-card .btn-primary {
+    padding: 18px 50px; /* Botón más grande */
+    font-size: 1.5em; /* Texto más grande */
+    border-radius: 60px; /* Más redondeado */
+    background-color: #D8C3A5; /* Color crema/beige */
+    color: #2E4053; /* Texto oscuro para contrastar */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Sombra prominente */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-card .btn-primary:hover {
+    background-color: #C3AF94; /* Tono más oscuro al pasar el ratón */
+    transform: translateY(-5px); /* Efecto de "levantamiento" */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+}
+
+.auth-card .remember-me-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: -15px; /* Ajusta para que no esté pegado al campo */
+    margin-bottom: 25px; /* Más espacio debajo */
+}
+
+.auth-card .remember-me-checkbox input[type="checkbox"] {
+    margin-right: 12px; /* Más espacio */
+    width: 18px; /* Tamaño del checkbox */
+    height: 18px;
+    background-color: transparent;
+    border: 2px solid #D8C3A5; /* Borde más visible */
+    border-radius: 5px; /* Más redondeado */
+    cursor: pointer;
+    appearance: none; /* Quita el estilo por defecto del navegador */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+}
+
+.auth-card .remember-me-checkbox input[type="checkbox"]:checked {
+    background-color: #D8C3A5; /* Fondo cuando está marcado */
+    border-color: #D8C3A5;
+}
+.auth-card .remember-me-checkbox input[type="checkbox"]:checked::before {
+    content: '✔'; /* Icono de check */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #2E4053; /* Color del check */
+    font-size: 14px;
+}
+
+.auth-card .remember-me-checkbox label {
+    margin-bottom: 0;
+    font-weight: normal;
+    color: #FFFFFF;
+    font-size: 1em;
+}
+
+.auth-links {
+    margin-top: 35px; /* Más espacio desde el botón */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 25px;
+}
+
+.auth-links a {
+    display: block;
+    margin-bottom: 12px; /* Más espacio entre enlaces */
+    color: #D8C3A5;
+    font-size: 1.05em; /* Enlaces un poco más grandes */
+    text-decoration: underline; /* Subrayado para mayor visibilidad */
+    transition: color 0.3s ease;
+}
+
+.auth-links a:hover {
+    color: #C3AF94;
+}
+
+/* Media queries para responsividad en login/registro */
+@media (max-width: 500px) {
+    .auth-card {
+        padding: 30px; /* Menos padding en móviles */
+        border-radius: 15px;
+    }
+    .auth-card h2 {
+        font-size: 2em;
+        margin-bottom: 25px;
+    }
+    .auth-card .form-control {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    .auth-card .btn-primary {
+        padding: 12px 30px;
+        font-size: 1.2em;
+    }
+    .auth-card .remember-me-checkbox label {
+        font-size: 0.9em;
+    }
+    .auth-links a {
+        font-size: 0.9em;
+    }
+}    
 
     /* Estilos generales para tablas */
     table {
@@ -365,7 +907,10 @@
       <nav>
         <ul>
           <li><%= link_to 'Inicio', root_path %></li>
-          <li><%= link_to 'Reservar Clases', bookings_path %></li>
+          <% if user_signed_in? && !current_user.admin? %> <%# SOLO si el usuario NO es admin %>
+            <li><%= link_to 'Reservar Clases', bookings_path %></li>
+            <li><%= link_to 'Mi Mensualidad', membership_status_path %></li>
+          <% end %>
           <% if user_signed_in? && current_user.admin? %>
             <li><%= link_to 'Admin: Horarios', admin_schedules_path %></li>
             <li><%= link_to 'Admin: Usuarios', admin_users_path %></li>

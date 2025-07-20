@@ -1,16 +1,131 @@
-<h1>¡Bienvenido a la aplicación de Peak Box!</h1>
+<div class="home-container">
+  <div class="home-content">
+    <div class="text-section">
+      <% if user_signed_in? %>
+        <p>Hola <%= current_user.first_name %></p>
+      <% end %>
+      <h1>¡Bienvenid@ a Peak Box Manizales!</h1>
+      <p>Tu nuevo centro de entrenamiento para transformar tu vida.</p>
+      <p>Agenda tus clases, gestiona tu membresía y alcanza tus metas.</p>
 
-<% if user_signed_in? %>
-  <p>Has iniciado sesión como <%= current_user.email %>.</p>
-  <% if current_user.admin? %>
-    <p><%= link_to 'Ir al Panel de Administración', admin_root_path %></p>
-  <% end %>
-  <p><%= link_to 'Cerrar Sesión', destroy_user_session_path, data: { turbo_method: :delete } %></p>
-<% else %>
-  <p>Por favor, inicia sesión o regístrate para continuar.</p>
-  <p><%= link_to 'Iniciar Sesión', new_user_session_path %></p>
-  <p><%= link_to 'Registrarse', new_user_registration_path %></p>
-<% end %>
+      <% if !user_signed_in? %>
+        <div class="button-group">
+          <%= link_to 'Iniciar Sesión', new_user_session_path, class: 'btn btn-primary' %>
+          <%= link_to 'Registrarse', new_user_registration_path, class: 'btn btn-secondary' %>
+        </div>
+      <% end %>
+    </div>
 
-<hr>
-<p>Esta es la página de inicio de tu aplicación principal.</p>
+    <div class="banner-section">
+      <div class="slideshow-container">
+        <div class="mySlides fade">
+          <%= image_tag "gym_image.png", alt: "Imagen 1 del gimnasio", class: "banner-image" %>
+        </div>
+
+        <div class="mySlides fade">
+          <%= image_tag "gym_image.png", alt: "Imagen 2 del gimnasio", class: "banner-image" %>
+        </div>
+
+        <div class="mySlides fade">
+          <%= image_tag "gym_image.png", alt: "Imagen 3 del gimnasio", class: "banner-image" %>
+        </div>
+
+        <div class="mySlides fade">
+          <%= image_tag "gym_image.png", alt: "Imagen 4 del gimnasio", class: "banner-image" %>
+        </div>
+
+      </div>
+      <br>
+
+      <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // JavaScript para el banner
+  let slideIndex = 1;
+  let autoplayTimeout;
+
+  // Funciones showSlides, plusSlides, currentSlide definidas dentro del ámbito
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active-dot", "");
+    }
+    // Asegurarse de que hay slides antes de intentar mostrar
+    if (slides.length > 0) {
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " active-dot";
+    }
+
+
+    clearTimeout(autoplayTimeout);
+    autoplayTimeout = setTimeout(function() {
+      plusSlides(1);
+    }, 5000);
+  }
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  // Iniciar el slideshow una vez que el DOM esté listo
+  showSlides(slideIndex);
+
+
+  // JavaScript para el contador regresivo
+  const openDate = new Date("July 19, 2025 00:00:00 GMT-0500").getTime();
+  const countdownElement = document.getElementById("countdown");
+
+  const updateCountdown = () => {
+    const now = new Date().getTime();
+    const distance = openDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    if (distance < 0) {
+      countdownElement.innerHTML = "¡Ya hemos abierto! ¡Te esperamos!";
+      countdownElement.classList.add('countdown-finished');
+      clearInterval(interval);
+    } else {
+      countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      countdownElement.classList.remove('countdown-finished');
+    }
+  };
+
+  updateCountdown();
+  const interval = setInterval(updateCountdown, 1000);
+
+
+  // JavaScript para el botón "Acceder a la Aplicación"
+  const goToAppButton = document.getElementById('go-to-app-button');
+  if (goToAppButton) {
+    goToAppButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('¡Serás redirigido a la aplicación principal de Peak Box!');
+      // window.location.href = "URL_PUBLICA_DE_TU_APP_PRINCIPAL/users/sign_in";
+    });
+  }
+}); // Fin de DOMContentLoaded
+</script>

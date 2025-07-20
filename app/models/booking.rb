@@ -29,7 +29,7 @@ class Booking < ApplicationRecord
 
   def user_membership_active
     if user && !user.membership_active?
-      errors.add(:user, "tu mensualidad no está activa. Por favor, actualiza tu pago.")
+       errors.add(:user, "#{user.first_name}, tu mensualidad no está activa. Por favor, actualiza tu pago.")
     end
   end
 end

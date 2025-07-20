@@ -1,5 +1,6 @@
 # config/routes.rb
 Rails.application.routes.draw do
+  get 'membership_status', to: 'memberships#status', as: 'membership_status'
   devise_for :users
 
   namespace :admin do

@@ -1,0 +1,20 @@
+<div class="membership-status-container">
+  <div class="membership-status-card">
+    <h2>Estado de tu Mensualidad</h2>
+
+    <div class="status-indicator <%= @status_class %>">
+      <p>Estado Actual:</p>
+      <h3><%= @membership_status %></h3>
+    </div>
+
+    <p class="status-message"><%= @message %></p>
+
+    <% if @membership_status == "Inactiva" %>
+      <p class="call-to-action">
+        Para activar tu mensualidad o si crees que hay un error, por favor, comunícate con la administración de Peak Box.
+      </p>
+    <% end %>
+
+    <%= link_to 'Volver a Mis Clases', bookings_path, class: 'btn btn-secondary mt-4' %>
+  </div>
+</div>
