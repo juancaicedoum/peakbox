@@ -38,6 +38,12 @@ test:
   <<: *default
   database: peak_box_app_test
 
+# Configuración de la base de datos para `cable` (SolidCable)
+# Esta debe apuntar a la misma URL de la base de datos en producción.
+cable:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+
 # As with config/credentials.yml, you should store your production database configuration here.
 # In a production environment, your ENV['DATABASE_URL'] will be used to configure the database for Rails.
 #
